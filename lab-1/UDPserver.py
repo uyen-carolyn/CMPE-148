@@ -6,7 +6,7 @@ port = 12000
 print('IP Address: ', gethostbyname(gethostname()))
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind((gethostbyname(gethostname()), port))
-print("Server is ready!!")
+print("The server is ready!")
 
 def find_leap_year(y):
     year = list(map(int, y.split(",")))
@@ -31,8 +31,8 @@ while True:
     try:
         if ((y == 'exit')):
             print('The client wants to exit')
-            res = "Exit"
-            serverSocket.sendto(res.encode('utf-8'),clientAddress)
+            resp = "Exit"
+            serverSocket.sendto(resp.encode('utf-8'),clientAddress)
             sys.exit()
         else:
             print('Received the following years: {!r}'.format(y))
@@ -41,12 +41,12 @@ while True:
             serverSocket.sendto("Invalid values. Please try again.",clientAddress)
     else:
         try:
-            res = find_leap_year(y)
-            print(res)
-            serverSocket.sendto(res.encode('utf-8'),clientAddress)
+            resp = find_leap_year(y)
+            print(resp)
+            serverSocket.sendto(resp.encode('utf-8'),clientAddress)
         except ValueError:
-            res= "Invalid values. Please try again."
-            serverSocket.sendto(res.encode('utf-8'), clientAddress)
+            resp = "Invalid values. Please try again."
+            serverSocket.sendto(resp.encode('utf-8'), clientAddress)
         else:
             print('Success. Send the result back to the client!')
 serverSocket.close()

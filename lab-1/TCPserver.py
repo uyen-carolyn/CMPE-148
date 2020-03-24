@@ -9,7 +9,7 @@ server_address = (IP_address,port)
 serverSocket.bind(server_address)
 serverSocket.listen(1)
 
-print('Server ready! ')
+print('The server ready! ')
 
 def find_leap_year(y):
     year = list(map(int, y.split(",")))

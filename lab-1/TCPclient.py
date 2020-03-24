@@ -8,7 +8,10 @@ client_address =(IP_adress,port)
 clientSocket.connect(client_address)
 
 while True:
-    year = input('Enter a set of years with a space in between each year. Type exit to close: ')
+    year = input('Enter a textfile containing the test cases. Type exit to close: ')
+    if (year != "exit"):
+        with open(year, 'r') as file:
+            year = file.read()
     clientSocket.send(year.encode('utf-8'))
     resp = clientSocket.recv(1024).decode('utf-8')
     print('Received from server:')

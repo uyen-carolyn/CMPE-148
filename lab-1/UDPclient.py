@@ -5,16 +5,19 @@ clientSocket = socket(AF_INET, SOCK_DGRAM) #create udp client socket
 serverAddress =(IP_address,port)
 
 while True:
-    year = input('Enter a set of years with a comma in between each year. Type exit to close: ')
+    year = input('Enter a textfile containing the test cases. Type exit to close: ')
+    if (year != "exit"):
+        with open(year, 'r') as file:
+            year = file.read()
     clientSocket.sendto(year.encode('utf-8'), serverAddress)
-    res, serverAddress = clientSocket.recvfrom(2048)
-    res = res.decode('utf-8')
+    resp, serverAddress = clientSocket.recvfrom(2048)
+    resp = resp.decode('utf-8')
     print('Received from server:')
-    if(res == "Exit"):
-        print(res)
+    if(resp == "Exit"):
+        print(resp)
         break
         sys.exit()
     else:
-        print(res)
+        print(resp)
 
 clientSocket.close()
